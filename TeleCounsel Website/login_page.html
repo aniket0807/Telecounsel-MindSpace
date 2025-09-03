@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MindSpace - Login</title>
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="left-section">
+        <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+        <div class="logo">
+          <img src="logo/logo.jpg" alt="MindSpace Logo">
+        </div>
+      </div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about_us_page.html">About Us</a></li>
+        <li><a href="services_page.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <button class="profile-btn" onclick="window.location.href='registration_page.html'">Register</button>
+    </nav>
+
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <span class="close-btn" onclick="toggleMenu()">x</span>
+      </div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about_us_page.html">About Us</a></li>
+        <li><a href="services_page.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <div class="login-container">
+      <div class="login-logo">
+        <img src="logo/2logo.png" alt="MindSpace Logo">
+      </div>
+      
+      <h2>Welcome Back</h2>
+      <p>Sign in to continue your mental wellness journey</p>
+      
+      <form class="login-form" id="loginForm">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+        
+        <button type="submit" class="login-btn">Sign In</button>
+      </form>
+      
+      <div class="forgot-password">
+        <a href="forgot-password.html">Forgot your password?</a>
+      </div>
+      
+      <div class="register-link">
+        Don't have an account? <a href="registration_page.html">Create one</a>
+      </div>
+      
+      <div class="login-options">
+        <p>Or sign in with</p>
+        <div class="social-login">
+          <div class="social-btn">
+            <img src="/api/placeholder/24/24" alt="Google">
+          </div>
+          <div class="social-btn">
+            <img src="/api/placeholder/24/24" alt="Facebook">
+          </div>
+          <div class="social-btn">
+            <img src="/api/placeholder/24/24" alt="Apple">
+          </div>
+        </div>
+      </div>
+      
+      <div class="emergency-access">
+        <h3>Need Immediate Help?</h3>
+        <p>Access emergency support without logging in</p>
+        <button class="emergency-btn" onclick="window.location.href='emergency.html'">
+          Emergency Support
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 MindSpace. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a></p>
+  </footer>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Simulate login - in a real app, this would send data to a server
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      // Basic validation
+      if (email && password) {
+        // Redirect to homepage after successful login
+        window.location.href = 'index.html';
+      } else {
+        alert('Please fill all required fields');
+      }
+    });
+    
+    function toggleMenu() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.style.left = sidebar.style.left === "0px" ? "-250px" : "0px";
+    }
+  </script>
+</body>
+</html>

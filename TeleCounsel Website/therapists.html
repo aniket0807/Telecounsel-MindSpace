@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MindSpace - Our Therapists</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .therapist-container {
+      max-width: 1200px;
+      margin: 120px auto 50px;
+      padding: 0 20px;
+    }
+    
+    .page-banner {
+      background-color: #3e1eff;
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+      margin-bottom: 50px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .filters-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 30px;
+      justify-content: center;
+    }
+    
+    .filter-btn {
+      background-color: white;
+      border: 2px solid #3e1eff;
+      color: #3e1eff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .filter-btn:hover, .filter-btn.active {
+      background-color: #3e1eff;
+      color: white;
+    }
+    
+    .search-bar {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto 30px;
+      position: relative;
+    }
+    
+    .search-bar input {
+      width: 100%;
+      padding: 12px 45px 12px 15px;
+      border: 2px solid #ddd;
+      border-radius: 25px;
+      font-size: 16px;
+    }
+    
+    .search-bar input:focus {
+      border-color: #3e1eff;
+      outline: none;
+    }
+    
+    .search-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #3e1eff;
+      font-size: 20px;
+    }
+    
+    .therapists-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .therapist-card-detailed {
+      background-color: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .therapist-card-detailed:hover {
+      transform: translateY(-10px);
+    }
+    
+    .therapist-header {
+      position: relative;
+      height: 150px;
+      background-color: #f0f0f0;
+      overflow: hidden;
+    }
+    
+    .therapist-availability {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background-color: #43d16e;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 15px;
+    }
+    
+    .therapist-profile-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid white;
+      position: absolute;
+      bottom: -40px;
+      left: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    
+    .therapist-body {
+      padding: 50px 20px 20px;
+    }
+    
+    .therapist-name {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+    
+    .therapist-name h3 {
+      font-size: 20px;
+      margin: 0;
+      margin-right: 10px;
+    }
+    
+    .verified-badge {
+      width: 20px;
+      height: 20px;
+    }
+    
+    .therapist-title {
+      color: #3e1eff;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .therapist-specialty {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+    
+    .rating {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .stars {
+      color: gold;
+      margin-right: 10px;
+    }
+    
+    .rating-count {
+      color: #666;
+      font-size: 14px;
+    }
+    
+    .bio {
+      color: #444;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    
+    .specialties {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    
+    .specialty-tag {
+      background-color: #f0f0f0;
+      color: #444;
+      font-size: 12px;
+      padding: 5px 10px;
+      border-radius: 15px;
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      background-color: white;
+      margin: 1px;
+      border-radius: 30px;
+    }
+    
+    .action-btn {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .book-btn {
+      background-color: #3e1eff;
+      color: white;
+    }
+    
+    .book-btn:hover {
+      background-color: #2e00cc;
+    }
+    
+    .call-btn {
+      background-color: #43d16e;
+      color: white;
+    }
+    
+    .call-btn:hover {
+      background-color: #35a757;
+    }
+    
+    .view-profile-btn {
+      background-color: #f0f0f0;
+      color: #444;
+    }
+    
+    .view-profile-btn:hover {
+      background-color: #ddd;
+    }
+    
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin: 50px 0;
+      gap: 10px;
+    }
+    
+    .page-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background-color: white;
+      border: 2px solid #ddd;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .page-btn:hover, .page-btn.active {
+      background-color: #3e1eff;
+      color: white;
+      border-color: #3e1eff;
+    }
+    
+    .page-btn.prev, .page-btn.next {
+      background-color: #3e1eff;
+      color: white;
+      border-color: #3e1eff;
+    }
+
+    /* CSS for the background stripes */
+    .therapist-header {
+      position: relative;
+      background: repeating-linear-gradient(
+        45deg,
+        #f0f0f0,
+        #f0f0f0 10px,
+        #e6e6e6 10px,
+        #e6e6e6 20px
+      );
+    }
+
+    /* CSS for responsive design */
+    @media (max-width: 768px) {
+      .therapists-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+      
+      .therapist-body {
+        padding: 50px 15px 15px;
+      }
+      
+      .action-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <div class="left-section">
+        <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+        <div class="logo">
+          <img src="logo/logo.jpg" alt="MindSpace Logo">
+        </div>
+      </div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="chat.html">Your Chat</a></li>
+        <li><a href="mental_health_tracking.html">Tracking</a></li>
+        <li><a href="therapists.html">Therapists</a></li>
+        <li><a href="book_session.html">Book Session</a></li>
+        <li><a href="about_us_page.html">About Us</a></li>
+        <li><a href="services_page.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <button class="profile-btn" onclick="window.location.href='profile.html'">Profile</button>
+    </nav>
+  
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <span class="close-btn" onclick="toggleMenu()">x</span>
+      </div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="chat.html">Your Chat</a></li>
+        <li><a href="mental_health_tracking.html">Tracking</a></li>
+        <li><a href="therapists.html">Therapists</a></li>
+        <li><a href="book_session.html">Book Session</a></li>
+        <li><a href="about_us_page.html">About Us</a></li>
+        <li><a href="services_page.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="therapist-container">
+    <div class="page-banner">
+      <h1>Our Therapists</h1>
+      <p>Connect with qualified professionals who can help you on your journey to better mental health.</p>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" placeholder="Search therapists by name or specialty..." id="searchInput">
+      <span class="search-icon"></span>
+    </div>
+
+    <div class="filters-section">
+      <button class="filter-btn active" data-filter="all">All Specialties</button>
+      <button class="filter-btn" data-filter="clinical">Clinical Psychology</button>
+      <button class="filter-btn" data-filter="psychiatry">Psychiatry</button>
+      <button class="filter-btn" data-filter="family">Family Therapy</button>
+      <button class="filter-btn" data-filter="addiction">Addiction Counseling</button>
+      <button class="filter-btn" data-filter="behavioral">Behavioral Therapy</button>
+    </div>
+
+    <div class="therapists-grid" id="therapistsGrid">
+      <!-- Therapist cards will be dynamically inserted here -->
+    </div>
+
+    <div class="pagination">
+      <div class="page-btn prev">«</div>
+      <div class="page-btn active">1</div>
+      <div class="page-btn">2</div>
+      <div class="page-btn">3</div>
+      <div class="page-btn next">»</div>
+    </div>
+  </div>
+
+  <button id="chatbotToggleBtn" class="floating-button">
+    <img src="like-icon.png" alt="Chat" />
+  </button>
+  
+  <!-- Chatbot Container -->
+  <div id="chatbotWindow" class="chatbot-hidden">
+    <div class="chatbot-header">
+      <span>MindSpace AI Chat</span>
+      <button onclick="toggleChatbot()">×</button>
+    </div>
+    <div class="chatbot-body" id="chatbotBody">
+      <p><em>Hello! How can I support you today?</em></p>
+    </div>
+    <div class="chatbot-footer">
+      <input type="text" id="chatInput" placeholder="Type a message..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 MindSpace. All rights reserved. | <a href="privacy_policy.html">Privacy Policy</a></p>
+  </footer>
+
+  <script>
+    // Therapist data
+    const therapists = [
+      {
+        name: "Dr. Sarah Johnson",
+        title: "Clinical Psychologist",
+        specialty: "Specializes in anxiety & depression",
+        profile: "therapist/1therapist.png",
+        verified: "therapist/verified.png",
+        bio: "Dr. Johnson has over 10 years of experience helping clients overcome anxiety and depression using evidence-based approaches.",
+        availability: "Available Today",
+        rating: 4.9,
+        reviews: 127,
+        tags: ["Anxiety", "Depression", "CBT", "Mindfulness"],
+        category: "clinical"
+      },
+      {
+        name: "Dr. Michael Lee",
+        title: "Psychiatrist",
+        specialty: "Child and adolescent mental health",
+        profile: "therapist/2therapist.png",
+        verified: "therapist/verified.png",
+        bio: "Dr. Lee specializes in helping children and adolescents navigate mental health challenges with compassion and expertise.",
+        availability: "Available Tomorrow",
+        rating: 4.8,
+        reviews: 93,
+        tags: ["Child Psychology", "ADHD", "Behavioral Issues", "Medication Management"],
+        category: "psychiatry"
+      },
+      {
+        name: "Dr. Aisha Rahman",
+        title: "Marriage & Family Therapist",
+        specialty: "Relationship counseling and family therapy",
+        profile: "therapist/3therapist.png",
+        verified: "therapist/verified.png",
+        bio: "Dr. Rahman helps couples and families improve communication and resolve conflicts to build stronger relationships.",
+        availability: "Available Today",
+        rating: 4.7,
+        reviews: 108,
+        tags: ["Couples Therapy", "Family Dynamics", "Communication", "Conflict Resolution"],
+        category: "family"
+      },
+      {
+        name: "Dr. Rajiv Mehta",
+        title: "Clinical Psychologist",
+        specialty: "PTSD and trauma recovery",
+        profile: "therapist/4therapist.png",
+        verified: "therapist/verified.png",
+        bio: "Dr. Mehta specializes in trauma-informed care, helping clients process difficult experiences and find healing.",
+        availability: "Available in 2 Days",
+        rating: 4.9,
+        reviews: 142,
+        tags: ["Trauma", "PTSD", "EMDR", "Resilience"],
+        category: "clinical"
+      },
+      {
+        name: "Dr. Emily Carter",
+        title: "Licensed Professional Counselor",
+        specialty: "Grief counseling and emotional wellness",
+        profile: "therapist/5therapist.png",
+        verified: "therapist/verified.png",
+        bio: "Dr. Carter provides compassionate support through grief, loss, and major life transitions.",
+        availability: "Available Today",
+        rating: 4.6,
+        reviews: 89,
+        tags: ["Grief", "Loss", "Life Transitions", "Emotional Regulation"],
+        category: "clinical"
+      },
+      {
+        name: "Dr. Naomi Choudhury",
+        title: "Behavioral Therapist",
+        specialty: "Autism spectrum and behavioral issues",
+        profile: "therapist/6therapist.png",
+        verified: "therapist/verified.png",
+        bio: "Dr. Choudhury works with individuals on the autism spectrum and those with behavioral challenges using evidence-based approaches.",
+        availability: "Available Tomorrow",
+        rating: 4.8,
+        reviews: 76,
+        tags: ["Autism", "ABA Therapy", "Behavioral Management", "Social Skills"],
+        category: "behavioral"
+      },
+      {
+        name: "Dr. James Patel",
+        title: "Addiction Counselor",
+        specialty: "Substance abuse recovery and relapse prevention",
+        profile: "therapist/7therapist.png",
+        verified: "therapist/verified.png",
+        bio: "Dr. Patel helps individuals overcome addiction and develop strategies for long-term recovery and relapse prevention.",
+        availability: "Available Today",
+        rating: 4.7,
+        reviews: 112,
+        tags: ["Addiction", "Recovery", "Relapse Prevention", "Substance Abuse"],
+        category: "addiction"
+      },
+      {
+        name: "Dr. Lisa Morgan",
+        title: "Mental Health Nurse Practitioner",
+        specialty: "Medication management and mood disorders",
+        profile: "therapist/8therapist.png",
+        verified: "therapist/verified.png",
+        bio: "Dr. Morgan specializes in medication management for mood disorders, offering holistic care approaches.",
+        availability: "Available in 3 Days",
+        rating: 4.8,
+        reviews: 98,
+        tags: ["Mood Disorders", "Medication Management", "Bipolar", "Depression"],
+        category: "psychiatry"
+      }
+    ];
+
+    // Function to generate stars based on rating
+    function generateStars(rating) {
+      let stars = '';
+      const fullStars = Math.floor(rating);
+      const halfStar = rating % 1 >= 0.5;
+      
+      for (let i = 0; i < fullStars; i++) {
+        stars += '★';
+      }
+      
+      if (halfStar) {
+        stars += '½';
+      }
+      
+      const emptyStars = 5 - stars.length;
+      for (let i = 0; i < emptyStars; i++) {
+        stars += '☆';
+      }
+      
+      return stars;
+    }
+
+    // Function to render therapist cards
+    function renderTherapists(therapistsToRender) {
+      const grid = document.getElementById('therapistsGrid');
+      grid.innerHTML = '';
+      
+      therapistsToRender.forEach(therapist => {
+        const card = document.createElement('div');
+        card.className = 'therapist-card-detailed';
+        card.dataset.category = therapist.category;
+        
+        const availabilityClass = therapist.availability.includes('Today') ? 'available' : '';
+        
+        card.innerHTML = `
+          <div class="therapist-header">
+            <div class="therapist-availability">${therapist.availability}</div>
+            <img src="${therapist.profile}" alt="${therapist.name}" class="therapist-profile-img">
+          </div>
+          <div class="therapist-body">
+            <div class="therapist-name">
+              <h3>${therapist.name}</h3>
+              <img src="${therapist.verified}" alt="Verified" class="verified-badge">
+            </div>
+            <div class="therapist-title">${therapist.title}</div>
+            <div class="therapist-specialty">${therapist.specialty}</div>
+            <div class="rating">
+              <div class="stars">${generateStars(therapist.rating)}</div>
+              <div class="rating-count">${therapist.rating} (${therapist.reviews} reviews)</div>
+            </div>
+            <div class="bio">${therapist.bio}</div>
+            <div class="specialties">
+              ${therapist.tags.map(tag => `<span class="specialty-tag">${tag}</span>`).join('')}
+            </div>
+            <div class="action-buttons">
+              <button class="action-btn book-btn">Book Session</button>
+              <button class="action-btn call-btn">Call Now</button>
+            </div>
+          </div>
+        `;
+        
+        grid.appendChild(card);
+      });
+    }
+
+    // Initial render
+    renderTherapists(therapists);
+
+    // Filter functionality
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        // Add active class to clicked button
+        this.classList.add('active');
+        
+        const filter = this.dataset.filter;
+        
+        if (filter === 'all') {
+          renderTherapists(therapists);
+        } else {
+          const filtered = therapists.filter(therapist => therapist.category === filter);
+          renderTherapists(filtered);
+        }
+      });
+    });
+
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase();
+      
+      if (searchTerm === '') {
+        renderTherapists(therapists);
+      } else {
+        const filtered = therapists.filter(therapist => {
+          return therapist.name.toLowerCase().includes(searchTerm) || 
+                 therapist.specialty.toLowerCase().includes(searchTerm) ||
+                 therapist.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+        });
+        renderTherapists(filtered);
+      }
+    });
+
+    // Toggle sidebar menu
+    function toggleMenu() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.style.left = sidebar.style.left === '0px' ? '-250px' : '0px';
+    }
+
+    // Toggle chatbot
+    function toggleChatbot() {
+      const chatbotWindow = document.getElementById('chatbotWindow');
+      chatbotWindow.classList.toggle('active');
+    }
+
+    // Chatbot functionality
+    document.getElementById('chatbotToggleBtn').addEventListener('click', toggleChatbot);
+
+    function sendMessage() {
+      const chatInput = document.getElementById('chatInput');
+      const message = chatInput.value;
+      
+      if (message.trim() === '') return;
+      
+      const chatBody = document.getElementById('chatbotBody');
+      chatBody.innerHTML += `<p><strong>You:</strong> ${message}</p>`;
+      
+      // Clear input
+      chatInput.value = '';
+      
+      // Simulated response
+      setTimeout(() => {
+        chatBody.innerHTML += `<p><em>I understand you're interested in our therapists. How can I help you find the right match for your needs?</em></p>`;
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }, 1000);
+    }
+
+    // Enter key for chat
+    document.getElementById('chatInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        sendMessage();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MindSpace - About Us</title>
+  <link rel="stylesheet" href="styles.css">
+ 
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <div class="left-section">
+        <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+        <div class="logo">
+          <img src="logo/logo.jpg" alt="MindSpace Logo">
+        </div>
+      </div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="chat.html">Your Chat</a></li>
+        <li><a href="mental_health_tracking.html">Tracking</a></li>
+        <li><a href="therapists.html">Therapists</a></li>
+        <li><a href="book_session.html">Book Session</a></li>
+        <li><a href="about_us_page.html">About Us</a></li>
+        <li><a href="services_page.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <button class="profile-btn" onclick="window.location.href='profile.html'">Profile</button>
+    </nav>
+
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <span class="close-btn" onclick="toggleMenu()">x</span>
+      </div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="chat.html">Your Chat</a></li>
+        <li><a href="mental_health_tracking.html">Tracking</a></li>
+        <li><a href="therapists.html">Therapists</a></li>
+        <li><a href="book_session.html">Book Session</a></li>
+        <li><a href="about_us_page.html">About Us</a></li>
+        <li><a href="services_page.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <div class="about-container">
+      <div class="page-banner">
+        <h1>About MindSpace</h1>
+        <p>We're on a mission to make mental healthcare accessible, stigma-free, and effective for everyone.</p>
+      </div>
+      
+      <section class="mission-section">
+        <div class="mission-content">
+          <h2 class="section-title">Our Mission</h2>
+          <p class="section-text">MindSpace was founded in 2022 with a clear purpose: to break down barriers to mental healthcare. We believe that everyone deserves access to quality mental health support regardless of their location, schedule, or financial situation.</p>
+          <p class="section-text">Through our innovative platform, we connect individuals with licensed therapists and create a safe space for healing, growth, and emotional wellbeing. We're committed to using technology to make therapy more accessible while maintaining the human connection that makes it effective.</p>
+        </div>
+        <div class="mission-image">
+          <img src="logo/2logo.png" alt="MindSpace Mission">
+        </div>
+      </section>
+      
+      <section class="values-section">
+        <h2 class="section-title">Our Core Values</h2>
+        <p class="section-text">These principles guide everything we do at MindSpace:</p>
+        
+        <div class="values-grid">
+          <div class="value-card">
+            <div class="value-icon">A</div>
+            <h3>Accessibility</h3>
+            <p>We believe mental healthcare should be available to everyone, regardless of location, income, or schedule. We work to remove barriers and make support accessible.</p>
+          </div>
+          
+          <div class="value-card">
+            <div class="value-icon">P</div>
+            <h3>Privacy</h3>
+            <p>Your confidentiality is our priority. We maintain the highest standards of privacy and security to create a safe environment for healing.</p>
+          </div>
+          
+          <div class="value-card">
+            <div class="value-icon">E</div>
+            <h3>Empathy</h3>
+            <p>We approach every interaction with compassion and understanding, recognizing that each person's journey is unique and deserving of respect.</p>
+          </div>
+          
+          <div class="value-card">
+            <div class="value-icon">I</div>
+            <h3>Innovation</h3>
+            <p>We continually evolve our platform to better serve our community, embracing technology that enhances the therapeutic experience.</p>
+          </div>
+        </div>
+      </section>
+      
+      <section class="team-section">
+        <h2 class="section-title">Our Leadership Team</h2>
+        <p class="section-text">Meet the dedicated professionals behind MindSpace:</p>
+        
+        <div class="team-grid">
+          <div class="team-member">
+            <img src="prfl/Dr. Sarah Miller.png" alt="Dr. Sarah Miller" class="team-photo">
+            <h3>Dr. Sarah Miller</h3>
+            <p>CEO & Co-Founder</p>
+            <p>Clinical Psychologist with 15+ years of experience</p>
+          </div>
+          
+          <div class="team-member">
+            <img src="prfl/Alex Chen.png" alt="Alex Chen" class="team-photo">
+            <h3>Alex Chen</h3>
+            <p>CTO & Co-Founder</p>
+            <p>Technology innovator with a passion for mental health advocacy</p>
+          </div>
+          
+          <div class="team-member">
+            <img src="prfl/Dr. James Wilson.png" alt="Dr. James Wilson" class="team-photo">
+            <h3>Dr. James Wilson</h3>
+            <p>Chief Medical Officer</p>
+            <p>Psychiatrist specialized in telemedicine and digital therapeutics</p>
+          </div>
+          
+          <div class="team-member">
+            <img src="prfl/Maya Patel.png" alt="Maya Patel" class="team-photo">
+            <h3>Maya Patel</h3>
+            <p>Director of Therapist Relations</p>
+            <p>Mental health advocate and licensed counselor</p>
+          </div>
+        </div>
+      </section>
+      
+      <section class="impact-section">
+        <h2 class="section-title">Our Impact</h2>
+        <p class="section-text">Since our founding, we've made a significant difference in mental healthcare access:</p>
+        
+        <div class="stats-container">
+          <div class="stat-item">
+            <div class="stat-number">50,000+</div>
+            <div class="stat-label">People Helped</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-number">500+</div>
+            <div class="stat-label">Licensed Therapists</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-number">200,000+</div>
+            <div class="stat-label">Sessions Delivered</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-number">95%</div>
+            <div class="stat-label">User Satisfaction</div>
+          </div>
+        </div>
+      </section>
+      
+      <section class="cta-section">
+        <h2 class="section-title">Join Our Mission</h2>
+        <p class="section-text">Whether you're seeking support or looking to provide it, there's a place for you in the MindSpace community.</p>
+        
+        <div class="cta-buttons">
+          <button class="cta-btn primary-btn" onclick="window.location.href='registration_page.html'">Create an Account</button>
+          <button class="cta-btn secondary-btn" onclick="window.location.href='contact.html'">Contact Us</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 MindSpace. All rights reserved. | <a href="privacy_policy.html">Privacy Policy</a></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

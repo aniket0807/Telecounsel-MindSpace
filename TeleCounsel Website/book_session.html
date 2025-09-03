@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MindSpace - Book Session</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Base Styles */
+    .book-session-container {
+      max-width: 1200px;
+      margin: 100px auto 50px;
+      padding: 0 20px;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .page-banner {
+      background-color: #3e1eff;
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+      margin-bottom: 50px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .page-banner h1 {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+    
+    .page-banner p {
+      font-size: 18px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Sessions Grid Layout */
+    .sessions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    /* Filter and Sort Controls */
+    .filter-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      padding: 8px 15px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .filter-btn:hover {
+      background-color: #eaeaea;
+    }
+
+    .filter-btn.active {
+      background-color: #3e1eff;
+      color: white;
+      border-color: #3e1eff;
+    }
+
+    .sort-select {
+      padding: 8px 15px;
+      border-radius: 20px;
+      border: 1px solid #ddd;
+      outline: none;
+      font-size: 14px;
+    }
+
+    /* Session Card Styles */
+    .session-card {
+      background-color: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .session-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .session-header {
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .session-title {
+      font-weight: bold;
+      font-size: 18px;
+      margin: 0;
+      color: #333;
+    }
+
+    .session-status {
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .status-confirmed {
+      background-color: #e6fff2;
+      color: #00cc66;
+    }
+
+    .status-pending {
+      background-color: #fff9e6;
+      color: #ffcc00;
+    }
+
+    .status-cancelled {
+      background-color: #ffe6e6;
+      color: #ff3333;
+    }
+
+    .session-body {
+      padding: 15px;
+    }
+
+    .therapist-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .therapist-photo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 15px;
+      border: 2px solid #3e1eff;
+    }
+
+    .therapist-details {
+      flex-grow: 1;
+    }
+
+    .therapist-name {
+      font-weight: bold;
+      margin: 0 0 5px 0;
+      font-size: 16px;
+    }
+
+    .therapist-specialty {
+      color: #666;
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .session-details {
+      margin-top: 15px;
+    }
+
+    .detail-item {
+      display: flex;
+      margin-bottom: 12px;
+      align-items: flex-start;
+    }
+
+    .detail-icon {
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
+      color: #3e1eff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .detail-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .detail-text {
+      flex-grow: 1;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .detail-text strong {
+      color: #333;
+      font-weight: 600;
+    }
+
+    .meeting-link {
+      padding: 8px 15px;
+      background-color: #3e1eff;
+      color: white;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .meeting-link:hover {
+      background-color: #2e00cc;
+    }
+
+    .notes-section {
+      margin-top: 15px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+    }
+
+    .notes-title {
+      font-weight: bold;
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 15px;
+      color: #333;
+    }
+
+    .notes-content {
+      font-size: 14px;
+      color: #555;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .payment-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      border-top: 1px solid #f0f0f0;
+      background-color: #fafafa;
+    }
+
+    .price {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .payment-status {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .payment-status.paid {
+      color: #00cc66;
+    }
+
+    .session-actions {
+      display: flex;
+      padding: 15px;
+      border-top: 1px solid #f0f0f0;
+      gap: 10px;
+    }
+
+    .action-btn {
+      flex: 1;
+      padding: 10px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .reschedule-btn {
+      background-color: #f0f0f0;
+      color: #333;
+    }
+
+    .reschedule-btn:hover {
+      background-color: #e0e0e0;
+    }
+
+    .cancel-btn {
+      background-color: #fff0f0;
+      color: #ff3333;
+    }
+
+    .cancel-btn:hover {
+      background-color: #ffe0e0;
+    }
+
+    /* Urgent Session Highlight */
+    .urgent-session {
+      position: relative;
+      border: 2px solid #ff3333;
+    }
+
+    .urgent-session::before {
+      content: "Today";
+      position: absolute;
+      top: -3px;
+      left: 14px;
+      background-color: #ff3333;
+      color: white;
+      padding: 3px 10px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .sessions-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-controls {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .page-banner h1 {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <div class="left-section">
+        <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+        <div class="logo">
+          <img src="logo/logo.jpg" alt="MindSpace Logo">
+        </div>
+      </div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="chat.html">Your Chat</a></li>
+        <li><a href="mental_health_tracking.html">Tracking</a></li>
+        <li><a href="therapists.html">Therapists</a></li>
+        <li><a href="book_session.html">Book Session</a></li>
+        <li><a href="about_us_page.html">About Us</a></li>
+        <li><a href="services_page.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <button class="profile-btn" onclick="window.location.href='profile.html'">Profile</button>
+    </nav>
+
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <span class="close-btn" onclick="toggleMenu()">x</span>
+      </div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="chat.html">Your Chat</a></li>
+        <li><a href="mental_health_tracking.html">Tracking</a></li>
+        <li><a href="therapists.html">Therapists</a></li>
+        <li><a href="book_session.html">Book Session</a></li>
+        <li><a href="about_us_page.html">About Us</a></li>
+        <li><a href="services_page.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+
+  <!-- Main content starts here -->
+  <div class="book-session-container">
+    <div class="page-banner">
+      <h1>Your Booked Sessions</h1>
+      <p>View, manage, and prepare for your upcoming therapy and counseling appointments.</p>
+    </div>
+
+    <div class="filter-controls">
+      <div class="filter-group">
+        <button class="filter-btn active">All Sessions</button>
+        <button class="filter-btn">Upcoming</button>
+        <button class="filter-btn">Past</button>
+        <button class="filter-btn">Cancelled</button>
+      </div>
+      <select class="sort-select">
+        <option value="newest">Sort by: Date (Newest First)</option>
+        <option value="oldest">Sort by: Date (Oldest First)</option>
+        <option value="therapist">Sort by: Therapist</option>
+      </select>
+    </div>
+
+    <div class="sessions-grid">
+      <!-- Urgent Session Card -->
+      <div class="session-card urgent-session">
+        <div class="session-header">
+          <h3 class="session-title">Therapy Session</h3>
+          <span class="session-status status-confirmed">Confirmed</span>
+        </div>
+        <div class="session-body">
+          <div class="therapist-info">
+            <img src="therapist/1therapist.png" alt="Dr. Emily Chen" class="therapist-photo">
+            <div class="therapist-details">
+              <h4 class="therapist-name">Dr. Emily Chen</h4>
+              <p class="therapist-specialty">Clinical Psychologist</p>
+            </div>
+          </div>
+          <div class="session-details">
+            <div class="detail-item">
+              <div class="detail-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div class="detail-text">
+                <strong>Today</strong>, May 5, 2025 • 2:00 PM - 2:45 PM
+              </div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div class="detail-text">
+                <strong>45 minutes</strong> duration
+              </div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div class="detail-text">
+                <strong>Online</strong> video session
+                <a href="#" class="meeting-link">
+                  Join Now
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14"></path>
+                    <path d="M12 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="notes-section">
+            <h4 class="notes-title">Preparation Tips:</h4>
+            <p class="notes-content">Find a quiet, private space. Have water and a notebook ready. Think about what you'd like to focus on in today's session. Take a few deep breaths before joining.</p>
+          </div>
+        </div>
+        <div class="payment-info">
+          <span class="price">$85.00</span>
+          <span class="payment-status paid">Paid • Invoice #12345</span>
+        </div>
+        <div class="session-actions">
+          <button class="action-btn reschedule-btn">Reschedule</button>
+          <button class="action-btn cancel-btn">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Regular Session Card -->
+      <div class="session-card">
+        <div class="session-header">
+          <h3 class="session-title">Counseling Session</h3>
+          <span class="session-status status-confirmed">Confirmed</span>
+        </div>
+        <div class="session-body">
+          <div class="therapist-info">
+            <img src="therapist/2therapist.png" alt="Dr. James Wilson" class="therapist-photo">
+            <div class="therapist-details">
+              <h4 class="therapist-name">Dr. James Wilson</h4>
+              <p class="therapist-specialty">Cognitive Behavioral Therapist</p>
+            </div>
+          </div>
+          <div class="session-details">
+            <div class="detail-item">
+              <div class="detail-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div class="detail-text">
+                <strong>Friday</strong>, May 9, 2025 • 10:30 AM - 11:30 AM
+              </div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div class="detail-text">
+                <strong>60 minutes</strong> duration
+              </div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <div class="detail-text">
+                <strong>In-person</strong> at MindSpace Clinic
+                <br>123 Healing Ave, Suite 500, San Francisco, CA
+              </div>
+            </div>
+          </div>
+          <div class="notes-section">
+            <h4 class="notes-title">Session Focus:</h4>
+            <p class="notes-content">Continuing our work on stress management techniques and discussing progress with mindfulness exercises from last session.</p>
+          </div>
+        </div>
+        <div class="payment-info">
+          <span class="price">$120.00</span>
+          <span class="payment-status">Pending • Due at session</span>
+        </div>
+        <div class="session-actions">
+          <button class="action-btn reschedule-btn">Reschedule</button>
+          <button class="action-btn cancel-btn">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Pending Session Card -->
+      <div class="session-card">
+        <div class="session-header">
+          <h3 class="session-title">Initial Assessment</h3>
+          <span class="session-status status-pending">Pending</span>
+        </div>
+        <div class="session-body">
+          <div class="therapist-info">
+            <img src="therapist/3therapist.png" alt="Dr. Sarah Johnson" class="therapist-photo">
+            <div class="therapist-details">
+              <h4 class="therapist-name">Dr. Sarah Johnson</h4>
+              <p class="therapist-specialty">Clinical Psychologist</p>
+            </div>
+          </div>
+          <div class="session-details">
+            <div class="detail-item">
+              <div class="detail-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div class="detail-text">
+                <strong>Monday</strong>, May 12, 2025 • 9:00 AM - 10:00 AM
+              </div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div class="detail-text">
+                <strong>60 minutes</strong> duration
+              </div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div class="detail-text">
+                <strong>Online</strong> video session
+                <br>Link will be available 15 minutes before session
+              </div>
+            </div>
+          </div>
+          <div class="notes-section">
+            <h4 class="notes-title">Preparation Tips:</h4>
+            <p class="notes-content">Please complete the intake form sent to your email at least 24 hours before our session. Have your medical history and current medications list ready.</p>
+          </div>
+        </div>
+        <div class="payment-info">
+          <span class="price">$150.00</span>
+          <span class="payment-status">Not paid • Pre-payment required</span>
+        </div>
+        <div class="session-actions">
+          <button class="action-btn reschedule-btn">Reschedule</button>
+          <button class="action-btn cancel-btn">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Cancelled Session Card -->
+      <div class="session-card">
+        <div class="session-header">
+          <h3 class="session-title">Group Therapy</h3>
+          <span class="session-status status-cancelled">Cancelled</span>
+        </div>
+        <div class="session-body">
+          <div class="therapist-info">
+            <img src="therapist/4therapist.png" alt="Dr. Michael Lee" class="therapist-photo">
+            <div class="therapist-details">
+              <h4 class="therapist-name">Dr. Michael Lee</h4>
+              <p class="therapist-specialty">Group Therapy Specialist</p>
+            </div>
+          </div>
+          <div class="session-details">
+            <div class="detail-item">
+              <div class="detail-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div class="detail-text">
+                <strong>Wednesday</strong>, April 30, 2025 • 6:00 PM - 7:30 PM
+              </div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div class="detail-text">
+                <strong>90 minutes</strong> duration
+              </div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <div class="detail-text">
+                <strong>In-person</strong> at Community Center
+                <br>456 Wellness Blvd, Room 302, San Francisco, CA
+              </div>
+            </div>
+          </div>
+          <div class="notes-section">
+            <h4 class="notes-title">Cancellation Notice:</h4>
+            <p class="notes-content">This session was cancelled due to therapist illness. Please reschedule or contact support for assistance.</p>
+          </div>
+        </div>
+        <div class="payment-info">
+          <span class="price">$65.00</span>
+          <span class="payment-status">Refunded • Ref #45678</span>
+        </div>
+        <div class="session-actions">
+          <button class="action-btn reschedule-btn">Reschedule</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Simple toggle for filter buttons
+    document.querySelectorAll('.filter-btn').forEach(button => {
+      button.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+          btn.classList.remove('active');
+        });
+        this.classList.add('active');
+        // In a real implementation, this would filter the sessions
+      });
+    });
+
+    // Function to toggle join button availability based on session time
+    function updateJoinButtons() {
+      // This would check if a session is within 15 minutes of starting
+      // and enable/disable join buttons accordingly
+      console.log("Join button status updated");
+    }
+
+    // Call initially and set up interval
+    updateJoinButtons();
+    setInterval(updateJoinButtons, 60000); // Check every minute
+  </script>
+
+<script src="script.js"></script>
+
+</body>
+</html>

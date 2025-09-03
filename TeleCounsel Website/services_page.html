@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MindSpace - Our Services</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .services-container {
+      max-width: 1200px;
+      margin: 100px auto 50px;
+      padding: 0 20px;
+    }
+    
+    .page-banner {
+      background: linear-gradient(135deg, #3e1eff 0%, #7a5cff 100%);
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+      margin-bottom: 50px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .page-banner h1 {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+    
+    .page-banner p {
+      font-size: 18px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .intro-section {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .intro-section p {
+      font-size: 18px;
+      max-width: 800px;
+      margin: 0 auto;
+      color: #444;
+      line-height: 1.6;
+    }
+    
+    .service-card {
+      display: flex;
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      margin-bottom: 40px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .service-image {
+      flex: 1;
+      min-width: 300px;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    
+    .service-content {
+      flex: 2;
+      padding: 40px;
+    }
+    
+    .service-tag {
+      display: inline-block;
+      background-color: #f0f0ff;
+      color: #3e1eff;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    
+    .service-title {
+      font-size: 28px;
+      color: #333;
+      margin-bottom: 15px;
+    }
+    
+    .service-description {
+      color: #555;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    
+    .service-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .service-feature {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      color: #444;
+    }
+    
+    .feature-icon {
+      color: #3e1eff;
+      font-weight: bold;
+    }
+    
+    .service-cta {
+      display: inline-block;
+      background-color: #3e1eff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+      margin-top: 15px;
+    }
+    
+    .service-cta:hover {
+      background-color: #2e00cc;
+    }
+    
+    .pricing-section {
+      background-color: #f9f9f9;
+      padding: 50px;
+      border-radius: 15px;
+      margin-bottom: 60px;
+    }
+    
+    .section-title {
+      color: #333;
+      font-size: 32px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .pricing-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+    
+    .pricing-card {
+      flex: 1;
+      min-width: 280px;
+      max-width: 350px;
+      background-color: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: transform 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .pricing-card:hover {
+      transform: translateY(-10px);
+    }
+    
+    .popular-tag {
+      position: absolute;
+      top: 20px;
+      right: -35px;
+      background-color: #ff6b6b;
+      color: white;
+      padding: 8px 40px;
+      transform: rotate(45deg);
+      font-size: 14px;
+      font-weight: bold;
+    }
+    
+    .pricing-header {
+      margin-bottom: 20px;
+    }
+    
+    .pricing-name {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    
+    .pricing-price {
+      font-size: 42px;
+      font-weight: bold;
+      color: #3e1eff;
+      margin-bottom: 5px;
+    }
+    
+    .pricing-cycle {
+      color: #888;
+      font-size: 16px;
+    }
+    
+    .pricing-description {
+      color: #666;
+      margin-bottom: 25px;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    
+    .pricing-features {
+      text-align: left;
+      margin-bottom: 30px;
+    }
+    
+    .pricing-features ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .pricing-features li {
+      padding: 8px 0;
+      color: #444;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .pricing-features li::before {
+      content: "✓";
+      color: #3e1eff;
+      font-weight: bold;
+    }
+    
+    .pricing-cta {
+      display: inline-block;
+      width: 100%;
+      padding: 12px 0;
+      background-color: #3e1eff;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    
+    .pricing-cta:hover {
+      background-color: #2e00cc;
+    }
+    
+    .pricing-cta.secondary {
+      background-color: white;
+      color: #3e1eff;
+      border: 2px solid #3e1eff;
+    }
+    
+    .pricing-cta.secondary:hover {
+      background-color: #f0f0ff;
+    }
+    
+    .faq-section {
+      margin-bottom: 60px;
+    }
+    
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+      gap: 30px;
+    }
+    
+    .faq-item {
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.03);
+    }
+    
+    .faq-question {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    
+    .faq-answer {
+      color: #555;
+      line-height: 1.6;
+    }
+    
+    .cta-section {
+      text-align: center;
+      background-color: #3e1eff;
+      color: white;
+      padding: 60px 20px;
+      border-radius: 15px;
+      margin-bottom: 60px;
+    }
+    
+    .cta-section h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+    
+    .cta-section p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      background-color: white;
+      color: #3e1eff;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 16px;
+      text-decoration: none;
+      transition: transform 0.3s, background-color 0.3s;
+    }
+    
+    .cta-button:hover {
+      transform: scale(1.05);
+      background-color: #f0f0ff;
+    }
+    
+    @media (max-width: 768px) {
+      .service-card {
+        flex-direction: column;
+      }
+      
+      .service-image {
+        height: 200px;
+        min-width: 100%;
+      }
+      
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .page-banner h1 {
+        font-size: 32px;
+      }
+      
+      .section-title {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <div class="left-section">
+        <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+        <div class="logo">
+          <img src="logo/logo.jpg" alt="MindSpace Logo">
+        </div>
+      </div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="chat.html">Your Chat</a></li>
+        <li><a href="mental_health_tracking.html">Tracking</a></li>
+        <li><a href="therapists.html">Therapists</a></li>
+        <li><a href="book_session.html">Book Session</a></li>
+        <li><a href="about_us_page.html">About Us</a></li>
+        <li><a href="services_page.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <button class="profile-btn" onclick="window.location.href='profile.html'">Profile</button>
+    </nav>
+
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <span class="close-btn" onclick="toggleMenu()">x</span>
+      </div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="chat.html">Your Chat</a></li>
+        <li><a href="mental_health_tracking.html">Tracking</a></li>
+        <li><a href="therapists.html">Therapists</a></li>
+        <li><a href="book_session.html">Book Session</a></li>
+        <li><a href="about_us_page.html">About Us</a></li>
+        <li><a href="services_page.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <div class="services-container">
+      <div class="page-banner">
+        <h1>Our Services</h1>
+        <p>Comprehensive mental health support tailored to your needs</p>
+      </div>
+      
+      <section class="intro-section">
+        <p>At MindSpace, we believe in providing holistic mental health services that meet you where you are. Whether you're looking for ongoing therapy, a quick check-in, or emergency support, our platform connects you with qualified professionals who can help.</p>
+      </section>
+      
+      <section class="service-cards">
+        <div class="service-card">
+          <div class="service-image" style="background-image: url('/api/placeholder/400/400')"></div>
+          <div class="service-content">
+            <span class="service-tag">Most Popular</span>
+            <h2 class="service-title">One-on-One Therapy</h2>
+            <p class="service-description">Connect with licensed therapists for personalized sessions tailored to your unique needs. Our therapists are experts in various areas, including anxiety, depression, trauma, and relationships.</p>
+            
+            <div class="service-features">
+              <div class="service-feature">
+                <span class="feature-icon">✓</span>
+                <span>Video sessions</span>
+              </div>
+              <div class="service-feature">
+                <span class="feature-icon">✓</span>
+                <span>Audio-only option</span>
+              </div>
+              <div class="service-feature">
+                <span class="feature-icon">✓</span>
+                <span>Text messaging</span>
+              </div>
+              <div class="service-feature">
+                <span class="feature-icon">✓</span>
+                <span>Flexible scheduling</span>
+              </div>
+            </div>
+            
+            <a href="#" class="service-cta">Book a Session</a>
+          </div>
+        </div>
+        
+        <div class="service-card">
+          <div class="service-image" style="background-image: url('/api/placeholder/400/400')"></div>
+          <div class="service-content">
+            <span class="service-tag">Anonymous</span>
+            <h2 class="service-title">Anonymous Support Chat</h2>
+            <p class="service-description">Need to talk but not ready for full therapy? Our anonymous chat connects you with trained listeners who can provide immediate emotional support without requiring any personal information.</p>
+            
+            <div class="service-features">
+              <div class="service-feature">
+                <span class="feature-icon">✓</span>
+                <span>100% anonymous</span>
+              </div>
+              <div class="service-feature">
+                <span class="feature-icon">✓</span>
+                <span>No registration needed</span>
+              </div>
+              <div class="service-feature">
+                <span class="feature-icon">✓</span>
+                <span>Available 24/7</span>
+              </div>
+              <div class="service-feature">
+                <span class="feature-icon">✓</span>
+                <span>Trained listeners</span>
+              </div>
+            </div>
+            
+            <a href="#" class="service-cta">Start Anonymous Chat</a>
+          </div>
+
+          </div>
+          </section>
+          </div></main>
+
+          <footer>
+            <p>&copy; 2025 MindSpace. All rights reserved. | <a href="privacy_policy.html">Privacy Policy</a></p>
+          </footer>
+
+          </body></html>
+
+          

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MindSpace - Mental Health Support</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <div class="left-section">
+        <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+        <div class="logo">
+          <img src="logo/logo.jpg" alt="TeleCounsel Logo">
+        </div>
+      </div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="chat.html">Your Chat</a></li>
+        <li><a href="mental_health_tracking.html">Tracking</a></li>
+        <li><a href="therapists.html">Therapists</a></li>
+        <li><a href="book_session.html">Book Session</a></li>
+        <li><a href="about_us_page.html">About Us</a></li>
+        <li><a href="services_page.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <button class="profile-btn" onclick="window.location.href='profile.html'">Profile</button>
+    </nav>
+  
+    
+
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <span class="close-btn" onclick="toggleMenu()">x</span>
+      </div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="chat.html">Your Chat</a></li>
+        <li><a href="mental_health_tracking.html">Tracking</a></li>
+        <li><a href="therapists.html">Therapists</a></li>
+        <li><a href="book_session.html">Book Session</a></li>
+        <li><a href="about_us_page.html">About Us</a></li>
+        <li><a href="services_page.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-banner">
+      <div class="hero-content">
+        <h1>Your Safe Space to Talk <br> Anytime, Anywhere.</h1>
+        <p>Anonymous. Professional. Judgment-free.</p>
+      </div>
+      <div class="therapist-profile">
+        <img src="therapist/1therapist.png" alt="Therapist Profile" id="therapistPic">
+      </div>
+    </section>
+
+    <section class="action-buttons">
+      <h2>How can we help today?</h2>
+      <div class="buttons">
+        <button onclick="startAnonymousChat()">Anonymous Chat</button>
+        <button onclick="openBooking()">Book Session</button>
+      </div>
+      <div class="sos-button">
+        <button onclick="triggerEmergency()">SOS - Emergency Support</button>
+      </div>
+    </section>
+
+    <section class="therapists">
+      <h2>Verified Therapists</h2>
+      <div id="therapist-container" class="therapist-scroll"></div>
+    </section>
+  </main>
+
+  <section class="articles-section">
+    <div class="container">
+      <h2 class="section-title">Articles</h2>
+      <!-- <p class="section-subtitle">Explore insights, self-help guides, and expert advice.</p> -->
+      
+      <div class="articles-grid">
+        <div class="article-card">
+          <img src="article/article1.jpg" alt="Article 1">
+          <h3>Overcoming Anxiety in the Modern World</h3>
+          <p>Practical tools to manage daily anxiety and feel more in control.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+        <div class="article-card">
+          <img src="article/article2.jpg" alt="Article 2">
+          <h3>How Therapy Can Transform Your Life</h3>
+          <p>Understand the power of talking to a professional and healing.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+        <div class="article-card">
+          <img src="article/article3.png" alt="Article 3">
+          <h3>Building Healthy Boundaries in Relationships</h3>
+          <p>Learn to say no without guilt and improve emotional wellness.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </div>
+      
+      <div class="view-all">
+        <a href="#" class="btn">View All Articles</a>
+      </div>
+    </div>
+  </section>
+
+  <button id="chatbotToggleBtn" class="floating-button">
+    <img src="like-icon.png" alt="Chat" />
+  </button>
+  
+  <!-- Chatbot Container -->
+  <div id="chatbotWindow" class="chatbot-hidden">
+    <div class="chatbot-header">
+      <span>MindSpace AI Chat</span>
+      <button onclick="toggleChatbot()">×</button>
+    </div>
+    <div class="chatbot-body" id="chatbotBody">
+      <p><em>Hello! How can I support you today?</em></p>
+    </div>
+    <div class="chatbot-footer">
+      <input type="text" id="chatInput" placeholder="Type a message..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  
+
+  <footer>
+    <p>&copy; 2025 TeleCounsel. All rights reserved. | <a href="privacy_policy.html">Privacy Policy</a></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

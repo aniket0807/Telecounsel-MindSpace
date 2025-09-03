@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MindSpace - User Profile</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: #f9fafb;
+      color: #333;
+    }
+    
+    /* NAVBAR BASE */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #3e1eff;
+      padding: 15px 20px;
+      color: white;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      flex-wrap: wrap; 
+      box-sizing: border-box; 
+      overflow-x: hidden;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.643);
+      z-index: 1000;
+    }
+    
+    .left-section {
+      gap: 10px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo img {
+      scale: 1;
+      width: auto;
+      height: 50px;
+    }
+    
+    .logo:hover {
+      color: rgb(251, 255, 0);
+    }
+    
+    .nav-links {
+      gap: 20px;
+      display: flex;
+      list-style: none;
+    }
+    
+    .nav-links li a {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    
+    .nav-links li a:hover {
+      color: rgb(0, 0, 0);
+    }
+    
+    .profile-btn {
+      margin-left: 8%;
+      border: none;
+      cursor: pointer;
+      color: #3e1eff;
+      font-weight: bold;
+      padding: 8px 14px;
+      border-radius: 20px;
+      background-color: white;
+    }
+    
+    .profile-btn:hover {
+      color: white;
+      font-weight: bold;
+      background-color: black;
+    }
+    
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      font-size: 28px;
+    }
+    
+    /* SIDEBAR */
+    .sidebar {
+      top: 0;
+      left: -250px;
+      width: 230px;
+      height: 100%;
+      z-index: 1000;
+      position: fixed;
+      padding-top: 60px;
+      transition: left 0.3s ease;
+      background-color: rgba(255, 255, 255, 0.763);
+    }
+    
+    .sidebar-header {
+      top: 10px;
+      right: 15px;
+      position: absolute;
+    }
+    
+    .close-btn {
+      font-size: 28px;
+      cursor: pointer;
+      color: rgb(255, 0, 0);
+    }
+    
+    .sidebar ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    
+    .sidebar ul li {
+      margin: 8px;
+      border-radius: 20px;
+      background: white;
+      transition: background 0.3s, color 0.3s;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+    }
+    
+    .sidebar ul li a {
+      display: block;
+      color: black;
+      font-weight: bold;
+      padding: 12px 20px;
+      text-decoration: none;
+    }
+    
+    .sidebar ul li:hover {
+      background-color: black;
+    }
+    
+    .sidebar ul li:hover a {
+      color: white;
+    }
+    
+    /* MOBILE RESPONSIVE */
+    @media screen and (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .hamburger {
+        display: block;
+      }
+      
+      .logo {
+        font-size: 20px;
+      }
+      
+      .profile-container {
+        flex-direction: column;
+      }
+      
+      .profile-sidebar, .profile-content {
+        width: 100%;
+      }
+    }
+    
+    /* Profile Page Styles */
+    .profile-page {
+      padding-top: 100px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .profile-header {
+      background-color: yellow;
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    
+    .profile-photo {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(0, 0, 0, 0.353);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      margin-bottom: 15px;
+    }
+    
+    .profile-title {
+      font-size: 28px;
+      margin: 10px 0;
+    }
+    
+    .profile-subtitle {
+      color: #555;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+    
+    .last-visit {
+      background-color: #BCF2F6;
+      display: inline-block;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    
+    .profile-container {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .profile-sidebar {
+      flex: 1;
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    
+    .profile-menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .profile-menu li {
+      margin-bottom: 10px;
+    }
+    
+    .profile-menu-item {
+      display: block;
+      padding: 12px 15px;
+      border-radius: 10px;
+      color: #333;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-weight: bold;
+    }
+    
+    .profile-menu-item:hover {
+      background-color: #f0f0f0;
+    }
+    
+    .profile-menu-item.active {
+      background-color: #3e1eff;
+      color: white;
+    }
+    
+    .profile-content {
+      flex: 3;
+    }
+    
+    .info-panel {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    
+    .info-panel h3 {
+      margin-top: 0;
+      border-bottom: 2px solid #f0f0f0;
+      padding-bottom: 10px;
+      font-size: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .edit-btn {
+      background: transparent;
+      border: 2px solid #3e1eff;
+      color: #3e1eff;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .edit-btn:hover {
+      background: #3e1eff;
+      color: white;
+    }
+    
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    
+    .info-item {
+      margin-bottom: 15px;
+    }
+    
+    .info-label {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 5px;
+    }
+    
+    .info-value {
+      font-size: 16px;
+      font-weight: 500;
+    }
+    
+    .alert-item {
+      background-color: #ffebeb;
+      border-left: 4px solid #ff3b30;
+      padding: 10px 15px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    
+    .medication-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .medication-info h4 {
+      margin: 0 0 5px 0;
+    }
+    
+    .medication-info p {
+      margin: 0;
+      font-size: 14px;
+      color: #777;
+    }
+    
+    .medication-status {
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    
+    .status-active {
+      background-color: #d1ffd6;
+      color: #00a020;
+    }
+    
+    .appointment-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      background-color: #f9fafb;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .appointment-date {
+      text-align: center;
+      min-width: 70px;
+    }
+    
+    .appointment-month {
+      background-color: #3e1eff;
+      color: white;
+      border-radius: 5px 5px 0 0;
+      padding: 5px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    
+    .appointment-day {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-top: none;
+      border-radius: 0 0 5px 5px;
+      padding: 5px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    
+    .appointment-details {
+      flex: 1;
+      padding: 0 15px;
+    }
+    
+    .appointment-details h4 {
+      margin: 0 0 5px 0;
+    }
+    
+    .appointment-details p {
+      margin: 0;
+      font-size: 14px;
+      color: #777;
+    }
+    
+    .appointment-actions button {
+      background-color: transparent;
+      border: 1px solid #ccc;
+      padding: 8px 15px;
+      border-radius: 20px;
+      margin-left: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .reschedule-btn {
+      color: #3e1eff;
+      border-color: #3e1eff !important;
+    }
+    
+    .reschedule-btn:hover {
+      background-color: #3e1eff;
+      color: white;
+    }
+    
+    .cancel-btn {
+      color: #ff3b30;
+      border-color: #ff3b30 !important;
+    }
+    
+    .cancel-btn:hover {
+      background-color: #ff3b30;
+      color: white;
+    }
+    
+    .document-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    
+    .document-item {
+      background-color: #f9fafb;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    
+    .document-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .document-icon {
+      font-size: 40px;
+      color: #3e1eff;
+      margin-bottom: 10px;
+    }
+    
+    .document-name {
+      font-weight: bold;
+      margin: 10px 0 5px;
+    }
+    
+    .document-date {
+      font-size: 12px;
+      color: #777;
+    }
+    
+    .upload-btn {
+      display: block;
+      background-color: #3e1eff;
+      color: white;
+      border: none;
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    .upload-btn:hover {
+      background-color: #2e00cc;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #fff;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="left-section">
+        <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+        <div class="logo">
+          <img src="logo/logo.jpg" alt="MindSpace Logo">
+        </div>
+      </div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="chat.html">Your Chat</a></li>
+        <li><a href="mental_health_tracking.html">Tracking</a></li>
+        <li><a href="therapists.html">Therapists</a></li>
+        <li><a href="book_session.html">Book Session</a></li>
+        <li><a href="about_us_page.html">About Us</a></li>
+        <li><a href="services_page.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <button class="profile-btn" onclick="window.location.href='profile.html'">Profile</button>
+    </nav>
+
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <span class="close-btn" onclick="toggleMenu()">x</span>
+      </div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="chat.html">Your Chat</a></li>
+        <li><a href="mental_health_tracking.html">Tracking</a></li>
+        <li><a href="therapists.html">Therapists</a></li>
+        <li><a href="book_session.html">Book Session</a></li>
+        <li><a href="about_us_page.html">About Us</a></li>
+        <li><a href="services_page.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="profile-page">
+    <div class="profile-header">
+      <img src="prfl/Profile.jpg" alt="Profile Photo" class="profile-photo">
+      <h1 class="profile-title">Aniket Saha</h1>
+      <p class="profile-subtitle">Member since March 2020</p>
+      <div class="last-visit">Last Visit: May 5, 2025</div>
+    </div>
+
+    <div class="profile-container">
+      <div class="profile-sidebar">
+        <ul class="profile-menu">
+          <li><a href="#" class="profile-menu-item active">Medical Profile</a></li>
+          <li><a href="#" class="profile-menu-item">Session History</a></li>
+          <li><a href="#" class="profile-menu-item">Prescriptions</a></li>
+          <li><a href="#" class="profile-menu-item">Billing & Insurance</a></li>
+          <li><a href="#" class="profile-menu-item">Account Settings</a></li>
+          <li><a href="#" class="profile-menu-item">Privacy & Security</a></li>
+        </ul>
+      </div>
+
+      <div class="profile-content">
+        <div class="info-panel">
+          <h3>
+            Personal Information
+            <button class="edit-btn">Edit</button>
+          </h3>
+          <div class="info-grid">
+            <div class="info-item">
+              <div class="info-label">Full Name</div>
+              <div class="info-value">Aniket Saha</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Date of Birth</div>
+              <div class="info-value">April 15, 2006</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Gender</div>
+              <div class="info-value">Male</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Blood Group</div>
+              <div class="info-value">O+</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Contact Number</div>
+              <div class="info-value">+91 8822474551</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Email Address</div>
+              <div class="info-value">aniketsaha@gmail.com</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Address</div>
+              <div class="info-value">Namati Jalah, Guwahati, Assam </div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Emergency Contact</div>
+              <div class="info-value">Mark Johnson - (555) 987-6543</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-panel">
+          <h3>
+            Medical Information
+            <button class="edit-btn">Edit</button>
+          </h3>
+          <div class="info-grid">
+            <div class="info-item">
+              <div class="info-label">Height</div>
+              <div class="info-value">5'7" (170 cm)</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Weight</div>
+              <div class="info-value">145 lbs (65.8 kg)</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Blood Pressure</div>
+              <div class="info-value">120/80 mmHg</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Last Updated</div>
+              <div class="info-value">March 15, 2025</div>
+            </div>
+          </div>
+
+          <h4>Allergies</h4>
+          <div class="alert-item">Penicillin - Severe</div>
+          <div class="alert-item">Peanuts - Moderate</div>
+
+          <h4>Existing Medical Conditions</h4>
+          <div class="info-item">
+            <div class="info-value">Generalized Anxiety Disorder (GAD)</div>
+          </div>
+          <div class="info-item">
+            <div class="info-value">Mild Insomnia</div>
+          </div>
+        </div>
+
+        <div class="info-panel">
+          <h3>Current Medications</h3>
+          <div class="medication-item">
+            <div class="medication-info">
+              <h4>Escitalopram (Lexapro)</h4>
+              <p>10mg - Once daily - Morning</p>
+              <p>Prescribed by: Dr. Michelle Zhang on Jan 12, 2025</p>
+            </div>
+            <span class="medication-status status-active">Active</span>
+          </div>
+          <div class="medication-item">
+            <div class="medication-info">
+              <h4>Melatonin</h4>
+              <p>5mg - As needed - Before bedtime</p>
+              <p>Recommended by: Dr. Michelle Zhang on Feb 03, 2025</p>
+            </div>
+            <span class="medication-status status-active">Active</span>
+          </div>
+        </div>
+
+        <div class="info-panel">
+          <h3>
+            Medical History
+            <button class="edit-btn">Edit</button>
+          </h3>
+          <h4>Past Treatments/Procedures</h4>
+          <div class="info-item">
+            <div class="info-label">Cognitive Behavioral Therapy (CBT)</div>
+            <div class="info-value">8-week program completed in 2023</div>
+          </div>
+
+          <h4>Family Medical History</h4>
+          <div class="info-item">
+            <div class="info-label">Mother</div>
+            <div class="info-value">Anxiety, Hypertension</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Father</div>
+            <div class="info-value">Type 2 Diabetes</div>
+          </div>
+        </div>
+
+        <div class="info-panel">
+          <h3>
+            Lifestyle & Habits
+            <button class="edit-btn">Edit</button>
+          </h3>
+          <div class="info-grid">
+            <div class="info-item">
+              <div class="info-label">Exercise Frequency</div>
+              <div class="info-value">3-4 times per week (yoga, walking)</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Diet</div>
+              <div class="info-value">Mostly vegetarian</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Smoking</div>
+              <div class="info-value">Non-smoker</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Alcohol</div>
+              <div class="info-value">Occasional (1-2 drinks/week)</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Sleep Pattern</div>
+              <div class="info-value">6-7 hours/night, occasional difficulty falling asleep</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Stress Level</div>
+              <div class="info-value">Moderate</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-panel">
+          <h3>Upcoming Appointments</h3>
+          <div class="appointment-item">
+            <div class="appointment-date">
+              <div class="appointment-month">MAY</div>
+              <div class="appointment-day">12</div>
+            </div>
+            <div class="appointment-details">
+              <h4>Therapy Session with Dr. Michelle Zhang</h4>
+              <p>Monday, May 12, 2025 • 2:00 PM - 3:00 PM</p>
+              <p>Virtual Session (Video Call)</p>
+            </div>
+            <div class="appointment-actions">
+              <button class="reschedule-btn">Reschedule</button>
+              <button class="cancel-btn">Cancel</button>
+            </div>
+          </div>
+          <div class="appointment-item">
+            <div class="appointment-date">
+              <div class="appointment-month">JUN</div>
+              <div class="appointment-day">03</div>
+            </div>
+            <div class="appointment-details">
+              <h4>Medication Review with Dr. Michelle Zhang</h4>
+              <p>Tuesday, June 3, 2025 • 10:30 AM - 11:00 AM</p>
+              <p>MindSpace Clinic - Room 204</p>
+            </div>
+            <div class="appointment-actions">
+              <button class="reschedule-btn">Reschedule</button>
+              <button class="cancel-btn">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-panel">
+          <h3>
+            Documents & Reports
+            <button class="edit-btn">Upload New</button>
+          </h3>
+          <div class="document-list">
+            <div class="document-item">
+              <div class="document-icon">📄</div>
+              <div class="document-name">Blood Test Results</div>
+              <div class="document-date">March 15, 2025</div>
+            </div>
+            <div class="document-item">
+              <div class="document-icon">📄</div>
+              <div class="document-name">Insurance Card</div>
+              <div class="document-date">January 05, 2025</div>
+            </div>
+            <div class="document-item">
+              <div class="document-icon">📄</div>
+              <div class="document-name">Medical History Form</div>
+              <div class="document-date">December 10, 2024</div>
+            </div>
+            <div class="document-item">
+              <div class="document-icon">📄</div>
+              <div class="document-name">Consent Forms</div>
+              <div class="document-date">December 10, 2024</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 MindSpace. All rights reserved. | <a href="privacy_policy.html">Privacy Policy</a></p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const sidebar = document.getElementById('sidebar');
+      const currentLeft = window.getComputedStyle(sidebar).left;
+      
+      if (currentLeft === '-250px') {
+        sidebar.style.left = '0';
+      } else {
+        sidebar.style.left = '-250px';
+      }
+    }
+    
+    // These functions would be implemented to handle the various actions on the profile page
+    function openProfileModal() {
+      // Implementation for opening profile modal
+      console.log("Opening profile modal");
+    }
+    
+    // Add event listeners for the edit buttons
+    document.querySelectorAll('.edit-btn').forEach(button => {
+      button.addEventListener('click', function() {
+        const section = this.closest('.info-panel').querySelector('h3').textContent.trim();
+        alert(`Editing ${section}`);
+      });
+    });
+  </script>
+</body>
+</html>
